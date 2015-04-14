@@ -419,6 +419,9 @@ class nLingual{
 		// Load sync rules
 		self::$sync_rules = (array) get_option( 'nLingual-sync_rules', array() );
 
+		// Load redirect ignores
+		self::$sync_rules = (array) get_option( 'nLingual-redirection_ignore', array() );
+
 		// Load  post types, defualt language, and set current language
 		self::$post_types = self::get_option( 'post_types' );
 		self::$default = self::lang_slug( self::get_option( 'default_lang' ) );
@@ -1757,6 +1760,13 @@ class nLingual{
 
 		// Get the current URL
 		$requested = self::$here_url;
+
+		// Get possibles redirection ignores
+		$ignores = explode(PHP_EOL, self::$options['redirection_ignore']);
+
+		foreach($ignores as $ignore)
+			if(preg_match((explode("\r", $ignore)[0] ?: $ignore), $requested, $matches))
+				return;
 
 		// Check in case it's just the home page
 		if ( rtrim( $requested, '/' ) == self::delocalize_url( get_option( 'home' ) ) ) return;
