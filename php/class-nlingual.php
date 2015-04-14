@@ -419,9 +419,6 @@ class nLingual{
 		// Load sync rules
 		self::$sync_rules = (array) get_option( 'nLingual-sync_rules', array() );
 
-		// Load redirect ignores
-		self::$sync_rules = (array) get_option( 'nLingual-redirection_ignore', array() );
-
 		// Load  post types, defualt language, and set current language
 		self::$post_types = self::get_option( 'post_types' );
 		self::$default = self::lang_slug( self::get_option( 'default_lang' ) );
