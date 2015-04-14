@@ -125,6 +125,24 @@ function nLingual_register_settings() {
 		}, 'nLingual', 'nLingual-options' );
 
 	/**
+	 * Ignore the redirection if the URL matchs the provided regex.
+	 *
+	 * @since 1.3.1
+	 */
+	add_settings_field( 'redirection-ignore', __ ( 'Ignore the redirection if match', NL_TXTDMN ), function() {
+			$ignores = nL_get_option( 'redirection_ignore' );
+
+			printf(
+				'<label>%s</label><br>',
+				__( 'Ignore language detection redirect if any part of the requested URL matches by a regular expression.', NL_TXTDMN )
+			);
+			printf(
+				'<textarea id="redirection-ignore" name="nLingual-options[redirection_ignore]" class="large-text code" rows="5">%s</textarea>',
+				$ignores
+			);
+		}, 'nLingual', 'nLingual-options' );
+
+	/**
 	 * Output the POST/GET var text fields.
 	 *
 	 * @since 1.0.0
